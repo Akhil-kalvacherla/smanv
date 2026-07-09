@@ -77,7 +77,7 @@ export default function Contact() {
       
       // Send email using EmailJS
       const templateParams = {
-        to_email: "akhilkalvacherla@gmail.com",
+        to_email: "smanvgroupsdigital@gmail.com",
         from_name: data.name,
         from_email: data.email,
         phone: data.phone,
