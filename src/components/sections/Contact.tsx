@@ -108,7 +108,7 @@ export default function Contact() {
         description="Tell us what you are building. We will get back within one business hour with concrete next steps."
       />
 
-      <div className="mt-14 grid gap-6 lg:grid-cols-2">
+      <div className="mt-10 grid gap-6 lg:mt-14 lg:grid-cols-2">
         {/* Left info card */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -174,7 +174,7 @@ export default function Contact() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="lg:col-span-1"
         >
-          <div className="relative h-full mx-auto max-w-md rounded-3xl border border-ink-100 bg-white p-5 shadow-card sm:p-6">
+          <div className="relative w-full rounded-2xl border border-ink-100 bg-white p-4 shadow-card sm:p-5 lg:p-6 lg:rounded-3xl">
             <AnimatePresence mode="wait">
               {submitted ? (
                 <motion.div
@@ -182,18 +182,18 @@ export default function Contact() {
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
-                  className="flex h-full flex-col items-center justify-center py-16 text-center"
+                  className="flex h-full flex-col items-center justify-center py-12 text-center sm:py-16"
                 >
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 220, damping: 14 }}
-                    className="grid h-20 w-20 place-items-center rounded-full bg-green-100 text-green-600"
+                    className="grid h-16 w-16 place-items-center rounded-full bg-green-100 text-green-600 sm:h-20 sm:w-20"
                   >
-                    <HiCheckCircle className="h-12 w-12" />
+                    <HiCheckCircle className="h-10 w-10 sm:h-12 sm:w-12" />
                   </motion.span>
-                  <h3 className="mt-6 text-2xl font-bold">Message sent!</h3>
-                  <p className="mt-2 max-w-sm text-sm text-ink-500">
+                  <h3 className="mt-4 text-xl font-bold sm:mt-6 sm:text-2xl">Message sent!</h3>
+                  <p className="mt-2 max-w-sm text-xs text-ink-500 sm:text-sm">
                     Thanks for reaching out. A senior team member will reply within one business hour.
                   </p>
                   <Button
@@ -213,13 +213,13 @@ export default function Contact() {
                   exit={{ opacity: 0 }}
                   onSubmit={handleSubmit(onSubmit)}
                   noValidate
-                  className="grid grid-cols-1 gap-4"
+                  className="grid grid-cols-1 gap-3 sm:gap-4"
                 >
                   <div className="relative">
                     <HiUser className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="text"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="John Smith"
                       {...register('name', { required: 'Name is required' })}
                     />
@@ -229,7 +229,7 @@ export default function Contact() {
                     <HiPhone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="tel"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="+91 00000 00000"
                       {...register('phone', { required: 'Phone is required' })}
                     />
@@ -239,7 +239,7 @@ export default function Contact() {
                     <HiEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="email"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="Email"
                       {...register('email', { required: 'Email is required' })}
                     />
@@ -249,7 +249,7 @@ export default function Contact() {
                     <HiBuildingOffice className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="text"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="Company Name"
                       {...register('company')}
                     />
@@ -259,7 +259,7 @@ export default function Contact() {
                     <HiGlobeAlt className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="url"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="Website Link"
                       {...register('website')}
                     />
@@ -267,7 +267,7 @@ export default function Contact() {
 
                   <div className="relative">
                     <HiBriefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
-                    <select className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400" {...register('businessType')}>
+                    <select className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400" {...register('businessType')}>
                       <option value="">Business Type</option>
                       {businessTypes.map((t) => (
                         <option key={t} value={t}>{t}</option>
@@ -277,7 +277,7 @@ export default function Contact() {
 
                   <div className="relative">
                     <HiChatBubbleLeft className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
-                    <select className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400" {...register('requirement')}>
+                    <select className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400" {...register('requirement')}>
                       <option value="">Website Requirement</option>
                       {requirements.map((r) => (
                         <option key={r} value={r}>{r}</option>

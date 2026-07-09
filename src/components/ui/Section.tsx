@@ -34,7 +34,7 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   const alignClass = align === 'center' ? 'mx-auto text-center items-center' : 'items-start text-left';
   return (
-    <div className={`flex max-w-2xl flex-col ${alignClass} ${className}`}>
+    <div className={`flex w-full max-w-2xl flex-col ${alignClass} ${className}`}>
       {eyebrow && (
         <motion.span
           className="eyebrow"
@@ -47,7 +47,7 @@ export function SectionHeading({
         </motion.span>
       )}
       <motion.h2
-        className="mt-4 text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.75rem]"
+        className="mt-4 text-2xl font-bold leading-tight sm:text-3xl lg:text-[2.75rem]"
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}

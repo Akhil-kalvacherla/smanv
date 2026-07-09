@@ -17,13 +17,13 @@ export default function Portfolio() {
       />
 
       {/* Filters */}
-      <div className="mt-10 flex flex-wrap justify-center gap-2">
+      <div className="mt-10 flex overflow-x-auto no-scrollbar gap-2 pb-2 justify-start sm:flex-wrap sm:justify-center sm:overflow-x-visible sm:pb-0">
         {projectCategories.map((cat) => (
           <button
             key={cat}
             type="button"
             onClick={() => setActive(cat)}
-            className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-300 ${
+            className={`shrink-0 rounded-full px-4 py-2 min-h-[44px] text-sm font-semibold transition-all duration-300 ${
               active === cat
                 ? 'bg-primary-600 text-white shadow-soft'
                 : 'border border-ink-200 bg-white text-ink-600 hover:border-primary-300 hover:text-primary-700'

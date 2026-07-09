@@ -24,9 +24,20 @@ const requirements = ['Custom Website Development', 'Website Redesign', 'Landing
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+
+  // Only apply parallax on larger screens to prevent mobile overflow
   const yRight = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const yLeft = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const {
     register,
@@ -82,7 +93,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" ref={ref} className="relative overflow-hidden pt-20 pb-12 sm:pt-24 lg:pt-28 lg:pb-16">
+    <section id="home" ref={ref} className="relative overflow-hidden pt-16 pb-8 sm:pt-20 sm:pb-12 lg:pt-28 lg:pb-16">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-grid opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_75%)]" />
@@ -90,11 +101,14 @@ export default function Hero() {
         <div className="absolute top-40 -right-20 h-72 w-72 rounded-full bg-accent-400/20 blur-3xl" />
       </div>
 
-      <div className="container-px grid items-center gap-12 lg:grid-cols-2 lg:gap-10">
-        {/* Left */}
-        <motion.div style={{ y: yLeft, opacity }} className="relative z-10">
+      <div className="container-px grid items-start gap-8 lg:items-center lg:gap-12 lg:grid-cols-2">
+        {/* Left — text content (always first in DOM = first on mobile) */}
+        <motion.div
+          style={isMobile ? {} : { y: yLeft, opacity }}
+          className="relative z-10 w-full min-w-0"
+        >
           <motion.h1
-            className="text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl"
+            className="font-extrabold tracking-tight"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.08 }}
@@ -103,7 +117,7 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            className="mt-5 max-w-xl text-lg leading-relaxed text-ink-500"
+            className="mt-4 max-w-xl text-sm leading-relaxed text-ink-500 sm:text-base lg:text-lg"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.16 }}
@@ -112,19 +126,19 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            className="mt-8 flex flex-wrap items-center gap-3"
+            className="mt-6 flex flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:flex-wrap"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.24 }}
           >
-            <Button href="#contact" size="lg" rightIcon={<HiArrowRight className="h-5 w-5" />}>
+            <Button href="#contact" size="lg" rightIcon={<HiArrowRight className="h-5 w-5" />} className="w-full sm:w-auto">
               Get Free Consultation
             </Button>
           </motion.div>
 
           {/* Stats */}
           <motion.div
-            className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4"
+            className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:grid-cols-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.32 }}
@@ -132,12 +146,12 @@ export default function Hero() {
             {heroStats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-ink-100 bg-white/70 p-4 shadow-soft backdrop-blur transition hover:-translate-y-1 hover:border-primary-200 hover:shadow-card"
+                className="rounded-2xl border border-ink-100 bg-white/70 p-3 shadow-soft backdrop-blur transition hover:-translate-y-1 hover:border-primary-200 hover:shadow-card sm:p-4"
               >
-                <div className="text-2xl font-bold text-ink-900 sm:text-3xl">
+                <div className="text-xl font-bold text-ink-900 sm:text-2xl lg:text-3xl">
                   <Counter value={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="mt-1 text-xs font-medium text-ink-500">{stat.label}</div>
+                <div className="mt-1 text-[10px] font-medium text-ink-500 sm:text-xs">{stat.label}</div>
               </div>
             ))}
           </motion.div>
@@ -145,13 +159,13 @@ export default function Hero() {
 
         {/* Right - Contact Form */}
         <motion.div
-          style={{ y: yRight }}
-          className="relative z-10 mx-auto w-full max-w-md lg:max-w-md"
+          style={isMobile ? {} : { y: yRight }}
+          className="relative z-10 w-full min-w-0 lg:max-w-md lg:ml-auto"
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="relative rounded-3xl border border-ink-100 bg-white p-5 shadow-card sm:p-6">
+          <div className="relative rounded-2xl border border-ink-100 bg-white p-4 shadow-card sm:p-5 lg:p-6 lg:rounded-3xl">
             <AnimatePresence mode="wait">
               {submitted ? (
                 <motion.div
@@ -190,13 +204,13 @@ export default function Hero() {
                   exit={{ opacity: 0 }}
                   onSubmit={handleSubmit(onSubmit)}
                   noValidate
-                  className="grid grid-cols-1 gap-4"
+                  className="grid grid-cols-1 gap-3 sm:gap-4"
                 >
                   <div className="relative">
                     <HiUser className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="text"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="John Smith"
                       {...register('name', { required: 'Name is required' })}
                     />
@@ -206,7 +220,7 @@ export default function Hero() {
                     <HiPhone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="tel"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="+91 00000 00000"
                       {...register('phone', { required: 'Phone is required' })}
                     />
@@ -216,7 +230,7 @@ export default function Hero() {
                     <HiEnvelope className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="email"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="Email"
                       {...register('email', { required: 'Email is required' })}
                     />
@@ -226,7 +240,7 @@ export default function Hero() {
                     <HiBuildingOffice className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="text"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="Company Name"
                       {...register('company')}
                     />
@@ -236,7 +250,7 @@ export default function Hero() {
                     <HiGlobeAlt className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
                     <input
                       type="url"
-                      className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
+                      className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400"
                       placeholder="Website Link"
                       {...register('website')}
                     />
@@ -244,7 +258,7 @@ export default function Hero() {
 
                   <div className="relative">
                     <HiBriefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
-                    <select className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400" {...register('businessType')}>
+                    <select className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400" {...register('businessType')}>
                       <option value="">Business Type</option>
                       {businessTypes.map((t) => (
                         <option key={t} value={t}>{t}</option>
@@ -254,7 +268,7 @@ export default function Hero() {
 
                   <div className="relative">
                     <HiChatBubbleLeft className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-ink-400" />
-                    <select className="w-full rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400" {...register('requirement')}>
+                    <select className="w-full min-h-[44px] rounded-xl border border-ink-200 bg-white pl-10 pr-4 py-2.5 text-sm text-ink-900 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-400" {...register('requirement')}>
                       <option value="">Website Requirement</option>
                       {requirements.map((r) => (
                         <option key={r} value={r}>{r}</option>

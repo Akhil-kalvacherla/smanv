@@ -13,7 +13,7 @@ export default function Services() {
         description="Four focused offerings that cover the full lifecycle of a modern website — from first sketch to ongoing care."
       />
 
-      <div className="mt-16 flex flex-col gap-16 lg:gap-24">
+      <div className="mt-12 flex flex-col gap-12 sm:mt-16 sm:gap-16 lg:gap-24">
         {services.map((service, i) => (
           <ServiceRow key={service.id} service={service} index={i} />
         ))}
@@ -33,7 +33,7 @@ function ServiceRow({ service, index }: { service: (typeof services)[number]; in
   const Icon = service.icon;
 
   return (
-    <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
+    <div className="grid items-center gap-6 lg:gap-8 lg:grid-cols-2 lg:gap-16">
       {/* Text */}
       <motion.div
         initial={{ opacity: 0, x: reversed ? 40 : -40 }}
@@ -51,10 +51,10 @@ function ServiceRow({ service, index }: { service: (typeof services)[number]; in
           </span>
         </div>
 
-        <h3 className="mt-5 text-2xl font-bold sm:text-3xl">{service.title}</h3>
-        <p className="mt-4 text-base leading-relaxed text-ink-500 sm:text-lg">{service.description}</p>
+        <h3 className="mt-4 text-xl font-bold sm:text-2xl lg:text-3xl">{service.title}</h3>
+        <p className="mt-3 text-sm leading-relaxed text-ink-500 sm:text-base lg:text-lg">{service.description}</p>
 
-        <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+        <ul className="mt-5 grid grid-cols-1 gap-2 sm:mt-6 sm:grid-cols-2">
           {service.highlights.map((h) => (
             <li key={h} className="flex items-center gap-2 text-sm font-medium text-ink-700">
               <HiCheckCircle className="h-5 w-5 shrink-0 text-primary-600" />
@@ -92,7 +92,7 @@ function ServiceIllustration({
   accent: string;
 }) {
   return (
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-ink-100 bg-white shadow-card">
+    <div className="relative aspect-video w-full overflow-hidden rounded-3xl border border-ink-100 bg-white shadow-card sm:aspect-[4/3]">
       <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary-100/60 blur-2xl" />
       <div className="pointer-events-none absolute -bottom-12 -left-8 h-40 w-40 rounded-full bg-accent-400/20 blur-2xl" />
       

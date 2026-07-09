@@ -59,16 +59,16 @@ export default function CTA() {
           </motion.p>
 
           <motion.div
-            className="mt-6 flex flex-wrap items-center justify-center gap-3"
+            className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.24 }}
           >
-            <Button href="#contact" size="lg" variant="primary" rightIcon={<HiArrowRight className="h-5 w-5" />}>
+            <Button href="#contact" size="lg" variant="primary" rightIcon={<HiArrowRight className="h-5 w-5" />} className="w-full sm:w-auto">
               Get Free Consultation
             </Button>
-            <span className="text-sm font-medium text-blue-700">No commitment · Reply within 1 business hour</span>
+            <span className="text-sm font-medium text-blue-700 text-center">No commitment · Reply within 1 business hour</span>
           </motion.div>
         </div>
       </div>

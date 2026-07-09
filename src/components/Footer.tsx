@@ -52,12 +52,13 @@ export default function Footer() {
 
       {/* Huge Background Text */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden select-none">
-        <h1
+        <h2
           className="
             whitespace-nowrap
-            text-[180px]
-            sm:text-[240px]
-            lg:text-[320px]
+            text-[120px]
+            sm:text-[180px]
+            lg:text-[280px]
+            xl:text-[320px]
             font-black
             uppercase
             tracking-[-0.08em]
@@ -65,17 +66,19 @@ export default function Footer() {
             opacity-30
             leading-none
           "
+          aria-hidden="true"
         >
           SMANV
-        </h1>
+        </h2>
       </div>
 
       {/* Main Content */}
-      <div className="container-px relative z-10 py-16">
-        <div className="grid gap-10 lg:grid-cols-12">
+      <div className="container-px relative z-10 py-12 sm:py-16">
+        {/* Top grid — 1 col on mobile, 2 col on sm/md, 12-col on lg */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
 
-          {/* Brand */}
-          <div className="lg:col-span-4">
+          {/* Brand — full width on mobile, 2 cols on sm, 4 cols on lg */}
+          <div className="sm:col-span-2 lg:col-span-4">
             <Logo />
 
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-500">
@@ -84,7 +87,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links — 1 col on sm, 2 cols on lg */}
           <div className="lg:col-span-2">
             <h4 className="text-sm font-semibold text-ink-900">
               Quick Links
@@ -104,7 +107,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Services — 1 col on sm, 3 cols on lg */}
           <div className="lg:col-span-3">
             <h4 className="text-sm font-semibold text-ink-900">
               Services
@@ -124,7 +127,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Social */}
+          {/* Social + CTA — 1 col on sm, 3 cols on lg */}
           <div className="lg:col-span-3">
             <h4 className="text-sm font-semibold text-ink-900">
               Follow Us
@@ -145,6 +148,8 @@ export default function Footer() {
                       flex
                       h-11
                       w-11
+                      min-h-[44px]
+                      min-w-[44px]
                       items-center
                       justify-center
                       rounded-xl
@@ -178,6 +183,7 @@ export default function Footer() {
                 bg-gray-900
                 px-5
                 py-3
+                min-h-[44px]
                 text-sm
                 font-semibold
                 text-white
@@ -192,13 +198,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-6 sm:flex-row">
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-6 sm:flex-row sm:mt-12">
 
-          <p className="text-xs text-gray-600">
+          <p className="text-xs text-gray-600 text-center sm:text-left">
             © {new Date().getFullYear()} SMANV Info Tech Pvt. Ltd. • Smarter Technology. Stronger Business.
           </p>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
             <a
               href="#"
               className="text-xs text-gray-500 transition hover:text-blue-600"

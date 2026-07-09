@@ -64,7 +64,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-xl border border-ink-200 bg-white/80 text-ink-800 backdrop-blur transition hover:bg-primary-50 lg:hidden"
+            className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-xl border border-ink-200 bg-white/80 text-ink-800 backdrop-blur transition hover:bg-primary-50 lg:hidden"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
@@ -94,7 +94,7 @@ export default function Navbar() {
           >
             <div className="absolute inset-0 bg-ink-900/40 backdrop-blur-sm" onClick={() => setOpen(false)} />
             <motion.div
-              className="absolute inset-x-0 top-0 origin-top bg-white pt-20 pb-8 shadow-lift"
+              className="absolute inset-x-0 top-0 origin-top bg-white pt-20 pb-8 shadow-lift overflow-y-auto max-h-screen"
               initial={{ y: '-100%' }}
               animate={{ y: 0 }}
               exit={{ y: '-100%' }}

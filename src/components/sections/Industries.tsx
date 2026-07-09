@@ -16,7 +16,7 @@ export default function Industries() {
         
 
         {/* Cards grid */}
-        <div className="relative z-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="relative z-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5 sm:gap-4">
           {industries.map((industry, i) => {
             const Icon = industry.icon;
             return (
@@ -32,9 +32,9 @@ export default function Industries() {
                 <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary-50 text-primary-600 transition-all duration-300 group-hover:rotate-6 group-hover:bg-primary-600 group-hover:text-white">
                   <Icon className="h-6 w-6" />
                 </span>
-                <div>
-                  <h3 className="text-sm font-semibold text-ink-900">{industry.name}</h3>
-                  <p className="mt-1 text-xs leading-snug text-ink-400">{industry.blurb}</p>
+                <div className="min-w-0 w-full">
+                  <h3 className="text-xs font-semibold text-ink-900 break-words sm:text-sm">{industry.name}</h3>
+                  <p className="mt-1 text-[10px] leading-snug text-ink-400 break-words sm:text-xs">{industry.blurb}</p>
                 </div>
               </motion.article>
             );

@@ -18,12 +18,12 @@ export default function Process() {
         description="A clear four-step process keeps your website project focused from the first discussion through launch."
       />
 
-      <div ref={ref} className="relative mx-auto mt-16 max-w-6xl">
-        {/* Curved SVG path with animation */}
+      <div ref={ref} className="relative mx-auto mt-12 max-w-6xl sm:mt-16">
+        {/* Curved SVG path — only visible on large screens */}
         <svg
           viewBox="0 0 1200 400"
           fill="none"
-          className="absolute inset-0 h-full w-full pointer-events-none"
+          className="absolute inset-0 h-full w-full pointer-events-none hidden lg:block"
           preserveAspectRatio="none"
         >
           {/* Background track */}
@@ -53,7 +53,7 @@ export default function Process() {
         </svg>
 
         {/* Process steps positioned along the curve */}
-        <div className="relative grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="relative grid grid-cols-1 gap-8 sm:gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           {processSteps.slice(0, 4).map((step, i) => (
             <motion.div
               key={step.step}
@@ -64,21 +64,21 @@ export default function Process() {
               className="relative"
             >
               <div className="group relative">
-                {/* Number badge */}
-                <div className="absolute -top-6 -left-6 z-10">
+                {/* Number badge — absolute on all sizes to overlap card */}
+                <div className="absolute -top-4 -left-4 z-20 sm:-top-6 sm:-left-6">
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 text-white font-black text-xl shadow-lg shadow-blue-500/30"
+                    className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 text-white font-black text-lg shadow-lg shadow-blue-500/30 sm:h-14 sm:w-14 sm:text-xl sm:rounded-2xl"
                   >
                     {step.step.replace('0', '')}
                   </motion.div>
                 </div>
 
                 {/* Card */}
-                <div className="rounded-3xl border border-white/60 bg-white/80 backdrop-blur-xl p-7 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/10">
-                  <div className="mb-4 h-1 w-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500" />
-                  <h3 className="text-xl font-bold text-ink-900">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-600">{step.description}</p>
+                <div className="rounded-2xl border border-white/60 bg-white/80 backdrop-blur-xl p-5 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/10 sm:p-6 sm:rounded-3xl lg:p-7 lg:mt-6">
+                  <div className="mb-3 h-1 w-10 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 sm:mb-4 sm:w-12" />
+                  <h3 className="text-base font-bold text-ink-900 sm:text-lg lg:text-xl">{step.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-ink-600 sm:mt-3 sm:text-sm">{step.description}</p>
                   
                   {/* Hover effect indicator */}
                   <div className="absolute bottom-4 right-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -92,6 +92,16 @@ export default function Process() {
                   </div>
                 </div>
               </div>
+
+              {/* Vertical animated connector between cards on mobile/tablet */}
+              {i < 3 && (
+                <div className="mx-auto mt-4 h-8 w-1 overflow-hidden rounded-full bg-ink-200 lg:hidden">
+                  <motion.div
+                    style={{ scaleY: pathLength, transformOrigin: 'top' }}
+                    className="h-full w-full bg-gradient-to-b from-blue-500 to-cyan-500"
+                  />
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
