@@ -69,7 +69,7 @@ export default function Hero() {
       
       // Send email using EmailJS
       const templateParams = {
-        to_email: "akhilkalvacherla@gmail.com",
+        to_email: "smanvgroupsdigital@gmail.com",
         from_name: data.name,
         from_email: data.email,
         phone: data.phone,
@@ -88,7 +88,7 @@ export default function Hero() {
       reset();
     } catch (error) {
       console.error("Failed to send email:", error);
-      alert("Failed to send message. Please try again or contact us directly at akhilkalvacherla@gmail.com");
+      alert("Failed to send message. Please try again or contact us directly at smanvgroupsdigital@gmail.com");
     }
   };
 

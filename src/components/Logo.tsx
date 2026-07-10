@@ -12,7 +12,7 @@ export default function Logo({ className = '', dark = false, height = 40 }: Logo
       aria-label="SMANV IT — navigating progress with precision"
     >
       <img
-        src="/Screenshot_2026-07-07_181332.png"
+        src="/logo.png"
         alt="SMANV IT logo"
         height={height}
         style={{ height: `${height}px`, width: 'auto' }}

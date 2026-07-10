@@ -96,7 +96,7 @@ export default function Contact() {
       reset();
     } catch (error) {
       console.error("Failed to send email:", error);
-      alert("Failed to send message. Please try again or contact us directly at akhilkalvacherla@gmail.com");
+      alert("Failed to send message. Please try again or contact us directly at smanvgroupsdigital@gmail.com");
     }
   };
 
