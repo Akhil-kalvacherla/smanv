@@ -58,7 +58,7 @@ export default function Contact() {
 
   // Initialize EmailJS once when component mounts
   useEffect(() => {
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "Lucsdrq5WEBSOhQWF";
     if (publicKey) {
       emailjs.init(publicKey);
     }
@@ -66,8 +66,8 @@ export default function Contact() {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_8rn1x2f";
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_uy1crui";
       
       console.log("EmailJS Config:", { serviceId, templateId });
       
