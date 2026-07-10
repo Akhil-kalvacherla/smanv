@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -42,8 +42,9 @@ export default function App() {
       <Navbar />
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<Home />} />
+          <Route path="/" element={<Navigate to="/website-development-services" replace />} />
+          <Route path="/website-development-services" element={<Home />} />
+          <Route path="*" element={<Navigate to="/website-development-services" replace />} />
         </Routes>
       </main>
       <Footer />
