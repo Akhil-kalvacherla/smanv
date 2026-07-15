@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Prevent horizontal overflow on all devices */
+    overflow-x: hidden;
+    max-width: 100%;
+    /* Performance optimization: reduce paint complexity */
+    will-change: scroll-position;
+  }
+  body {
+    @apply bg-white font-sans text-ink-700 antialiased;
+    overflow-x: hidden;
+    max-width: 100%;
+    /* Performance optimization */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Responsive headings using clamp() */
+  h1 {
+    @apply font-display text-ink-900;
+    letter-spacing: -0.02em;
+    font-size: clamp(1.75rem, 5vw + 0.5rem, 3.75rem);
+    line-height: 1.1;
+  }
+  h2 {
+    @apply font-display text-ink-900;
+    letter-spacing: -0.02em;
+    font-size: clamp(1.5rem, 3.5vw + 0.5rem, 2.75rem);
+    line-height: 1.2;
+  }
+  h3 {
+    @apply font-display text-ink-900;
+    letter-spacing: -0.015em;
+    font-size: clamp(1.1rem, 2vw + 0.4rem, 1.875rem);
+    line-height: 1.3;
+  }
+  h4, h5 {
+    @apply font-display text-ink-900;
+    letter-spacing: -0.01em;
+  }
+
+  /* Visible keyboard focus rings for accessibility */
+  :focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* Prevent images and media from overflowing */
+  img, video, iframe, embed, object {
+    max-width: 100%;
+    /* Performance optimization for images */
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  /* Performance optimization: reduce repaints for animated elements */
+  .will-change-transform {
+    will-change: transform;
+  }
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  ::selection {
+    @apply bg-primary-600 text-white;
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply mx-auto w-full max-w-[1280px] px-4 sm:px-8 lg:px-12;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary-700;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent;
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .glass-dark {
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  /* Minimum touch target — 44×44px per WCAG */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .bg-dots {
+    background-image: radial-gradient(rgba(37, 99, 235, 0.18) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+  /* Prevent word overflow for long strings */
+  .break-anywhere {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+/* Glow/shine animation for industries buttons */
+@keyframes pill-blink {
+  0%, 100% {
+    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.1);
+    border-color: rgba(147, 197, 253, 1);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4), 0 0 30px rgba(37, 99, 235, 0.2);
+    border-color: rgba(59, 130, 246, 1);
+  }
+}
+
+.animate-pill-blink {
+  animation: pill-blink 3s ease-in-out infinite;
+}
+
+/* ─── Swiper overrides ─────────────────────────────────────────── */
+.swiper-pagination-bullet {
+  background: #2563eb !important;
+  opacity: 0.25 !important;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  width: 22px !important;
+  border-radius: 9999px !important;
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #2563eb !important;
+  /* Scale down nav arrows on small screens */
+  width: 32px !important;
+  height: 32px !important;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 14px !important;
+}
+@media (min-width: 640px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 20px !important;
+  }
+}

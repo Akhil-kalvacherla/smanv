@@ -1,0 +1,8 @@
+{
+  "name": "SMANV IT",
+  "description": "Premium website development, redesign, and maintenance for modern businesses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
