@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -12,28 +12,11 @@ import { FaWhatsapp } from 'react-icons/fa6';
 
 export default function ThankYou() {
   const navigate = useNavigate();
-  const [countdown, setCountdown] = useState(8);
 
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Auto-redirect countdown
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          navigate('/website-development-services');
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [navigate]);
 
   return (
     <div className="relative min-h-[90vh] w-full bg-slate-50/50 flex flex-col items-center justify-center py-16 px-4 overflow-hidden select-none">
@@ -164,54 +147,24 @@ export default function ThankYou() {
           </a>
         </motion.div>
 
-        {/* 6. COUNTDOWN DOCK & BUTTON ACTION */}
+        {/* 6. BACK BUTTON */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="mt-10 pt-8 border-t border-ink-100 flex flex-col sm:flex-row items-center justify-between gap-6"
+          className="mt-10 pt-8 border-t border-ink-100 flex justify-center"
         >
-          {/* Circular Countdown Gauge */}
-          <div className="flex items-center gap-3.5">
-            <div className="relative flex h-12 w-12 items-center justify-center">
-              {/* Outer stroke circle */}
-              <svg className="absolute inset-0 h-full w-full rotate-[-90deg]">
-                <circle
-                  cx="24"
-                  cy="24"
-                  r="20"
-                  fill="none"
-                  stroke="#f1f5f9"
-                  strokeWidth="3.5"
-                />
-                <motion.circle
-                  cx="24"
-                  cy="24"
-                  r="20"
-                  fill="none"
-                  stroke="#3b82f6"
-                  strokeWidth="3.5"
-                  strokeDasharray="125.6"
-                  initial={{ strokeDashoffset: 0 }}
-                  animate={{ strokeDashoffset: (125.6 * (8 - countdown)) / 8 }}
-                  transition={{ duration: 1, ease: 'linear' }}
-                />
-              </svg>
-              <span className="text-sm font-extrabold text-blue-600">{countdown}s</span>
-            </div>
-            <div className="text-left">
-              <p className="text-xs font-bold text-ink-800">Auto-redirecting Home</p>
-              <p className="text-[10px] font-medium text-ink-400">Sit back while we sync your portal...</p>
-            </div>
-          </div>
-
-          {/* Instant Return Button */}
           <button
-            onClick={() => navigate('/website-development-services')}
-            className="flex h-12 items-center justify-center gap-2 px-6 rounded-2xl bg-ink-950 hover:bg-ink-900 text-white text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer w-full sm:w-auto"
+            onClick={() => {
+              navigate('/website-development-services');
+              setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }, 100);
+            }}
+            className="flex h-12 items-center justify-center gap-2 px-6 rounded-2xl bg-ink-950 hover:bg-ink-900 text-white text-sm font-bold shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
           >
             <HiArrowLeft className="h-4 w-4" />
-            Return Home Instantly
+            Back to Home
           </button>
         </motion.div>
       </motion.div>
